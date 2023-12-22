@@ -23,7 +23,8 @@ app.use(productRouter);
 app.use(userRouter);
 
 // DataBase Connection 
-var mongoDB = 'mongodb://localhost:27017/my_database';
+// var mongoDB = 'mongodb://localhost:27017/my_database';
+var mongoDB = "mongodb+srv://pranay:root@cluster0.oz7eirb.mongodb.net/?retryWrites=true&w=majority"
 mongoose.connect(mongoDB)
     .then(() => { console.log("Connection successful") })
     .catch((e) => console.log(e));
