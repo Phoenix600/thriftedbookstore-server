@@ -30,4 +30,4 @@ mongoose.connect(mongoDB)
     .catch((e) => console.log(e));
 
 // last line of any express js project 
-app.listen(PORT, () => { console.log(`Conneted Port at ${PORT}`) })
+app.listen(PORT, "0.0.0.0",() => { console.log(`Conneted Port at ${PORT}`) })
