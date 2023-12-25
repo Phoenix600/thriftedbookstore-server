@@ -81,6 +81,7 @@ sellerRoute.post(
 
         // token is empty 
         if (!token) return res.json(false);
+        console.log(token);
 
         // If token is not empty then verifiy the token 
         const isverified = jwt.verify(token, "passwordKey");
