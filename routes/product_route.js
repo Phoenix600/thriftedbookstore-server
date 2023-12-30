@@ -4,7 +4,7 @@ const expressAsyncHandler = require("express-async-handler");
 
 // Imports from other files 
 const auth_middleware = require("../middlewares/auth_middleware").auth_middleware;
-const { Product } = require("../models/product_model");
+const Product = require("../models/product_model");
 const { purge } = require("./seller_route");
 
 

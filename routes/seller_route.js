@@ -9,6 +9,7 @@ const auth_middleware = require("../middlewares/auth_middleware").auth_middlewar
 const expressAsyncHandler = require("express-async-handler");
 const seller_middleware = require("../middlewares/seller_middleware");
 const Order = require("../models/order_model");
+const { Product } = require("../models/product_model");
 
 
 
@@ -171,7 +172,7 @@ sellerRoute.post(
     expressAsyncHandler(
         async (req, res) => {
             const { id } = req.body;
-            let product = await findByIdAndDelete(id);
+            let product = await Product.findByIdAndDelete(id);
             res.json(product);
         }
     ),
