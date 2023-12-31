@@ -109,6 +109,31 @@ sellerRoute.post(
 
 
 /**
+ * @description The given api is used to save address of the book store of the seller 
+ * @route POST/seller/save-user-address  
+ * @access public 
+ */
+sellerRoute.post(
+    "/seller/save-seller-address",
+    auth_middleware,
+    expressAsyncHandler(
+        async (req, res) => {
+            const { address } = req.body;
+            let user = await User.findById(req.user);
+            user.address = address;
+            user = await user.save();
+            console.log(address);
+            console.log(user);
+            res.json(user);
+        }
+    ),
+);
+
+
+
+
+
+/**
  * @description Once the token is passed through the req, if the token in correct seller details will be displayed or sent via response 
  * @route GET/
  * @access public 
