@@ -10,6 +10,7 @@ const expressAsyncHandler = require("express-async-handler");
 const seller_middleware = require("../middlewares/seller_middleware");
 const Order = require("../models/order_model");
 const { Product } = require("../models/product_model");
+const { sellerMid } = require("../middlewares/seller_middleware");
 
 
 
@@ -231,9 +232,10 @@ sellerRoute.post(
     expressAsyncHandler(
         async (req, res) => {
             const { id, status } = req.body;
-            let order = Order.findById(id);
+            let order = await Order.findById(id);
             order.status = status;
             order = await order.save();
+            console.log(order);
             res.json(order);
         }
     ),

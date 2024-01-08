@@ -24,12 +24,13 @@ const seller_middleware = expressAsyncHandler(
         if (user.type == "user") {
             return res.status(401).json({ msg: "You are not an admin" });
         }
-
         // if token is verified 
-        req.user = verified.id;
+        req.user = verified;
         req.token = token;
         next();
     }
 );
+
+
 
 module.exports = seller_middleware;

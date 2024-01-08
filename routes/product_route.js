@@ -4,17 +4,14 @@ const expressAsyncHandler = require("express-async-handler");
 
 // Imports from other files 
 const auth_middleware = require("../middlewares/auth_middleware").auth_middleware;
-const Product = require("../models/product_model");
-const { purge } = require("./seller_route");
-
-
+const { Product } = require("../models/product_model");
 /**
  * @description
  * @route GET /api/products
  * @access public  
  */
 productRouter.get(
-    "api/products/",
+    "/api/products/",
     auth_middleware,
     expressAsyncHandler(
         async (req, res) => {
@@ -99,6 +96,8 @@ productRouter.get("/api/deal-of-day", auth_middleware, expressAsyncHandler(async
 
         return aSum < bSum ? 1 : -1;
     });
+    console.log(products[0]);
+    res.json(products[0]);
 }))
 
 module.exports = productRouter;

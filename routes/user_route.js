@@ -5,7 +5,7 @@ const expressAsyncHandler = require("express-async-handler");
 // Imports from the local packages 
 const userRouter = express.Router();
 const Order = require("../models/order_model");
-const Product = require("../models/product_model");
+const { Product } = require("../models/product_model");
 const User = require("../models/user_model");
 const { auth_middleware } = require("../middlewares/auth_middleware");
 
@@ -42,7 +42,7 @@ userRouter.post(
                 user.cart.push({ product, quantity: 1 });
             }
         }
-        user = await User.save();
+        user = await user.save();
         res.json(user);
     }) // expressAyncHandler 
 )
@@ -96,7 +96,7 @@ userRouter.post(
 
 
 userRouter.post(
-    "api/order",
+    "/api/order",
     auth_middleware,
     expressAsyncHandler(
         async (req, res) => {
@@ -128,6 +128,7 @@ userRouter.post(
                 orderedAt: new Date().getTime(),
             });
             order = await order.save();
+            console.log(order);
             res.json(order);
 
         }
@@ -140,9 +141,24 @@ userRouter.get(
     expressAsyncHandler(
         async (req, res) => {
             const orders = await Order.find({ userId: req.user });
+            console.log(orders);
             res.json(orders);
         }
     )
 )
+
+
+userRouter.get(
+    "/api/get-products",
+    auth_middleware,
+    expressAsyncHandler(
+        async (req, res) => {
+            const products = await Product.find({});
+            console.log(products);
+            res.json(products);
+        }
+    ), // expressAsyncHandler 
+); // 
+
 
 module.exports = userRouter;
